@@ -12,7 +12,7 @@
 	      p.project_encrypt,
 	      p.create_date,
 	      p.project_comment,
-	      u.user_name
+	      u.username
 	    FROM
 	      project_info AS p
 	    INNER JOIN user_info AS u ON p.user_id = u.id

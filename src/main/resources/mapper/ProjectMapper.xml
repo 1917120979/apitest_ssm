@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybf.apitest.mapper.ProjectMapper">
+	<select id="queryByUserId" resultType="Project">
+		SELECT
+	      p.id,
+	      p.project_name,
+	      p.project_env,
+	      p.project_sign,
+	      p.project_encrypt,
+	      p.create_date,
+	      p.project_comment,
+	      u.user_name
+	    FROM
+	      project_info AS p
+	    INNER JOIN user_info AS u ON p.user_id = u.id
+	    WHERE
+	      p.user_id IN (
+	        SELECT
+	          l.limit_id
+	        FROM
+	          limit_info AS l
+	        WHERE
+	          l.user_id = #{uid}
+	      )
+	</select>
+</mapper>
